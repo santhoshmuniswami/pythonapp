@@ -42,15 +42,15 @@ def web(page,WebUrl,domain):
             myvalue=urlparse(tet_2)
             if myvalue[1] ==  domain or myvalue[1] == '' or myvalue[1] == '/':
                 listofpaths.append(myvalue[2])
-                while '' in listofpaths:
-                    listofpaths.remove('')
+        
+        while '' in listofpaths:
+            listofpaths.remove('')
 
 
-                finalset=set(listofpaths)
-                print(finalset)
+        finalset=set(listofpaths)
+        print(finalset)
 
-                count = count + 1
-                
+        count = count + 1
         return list(finalset)
 
 
