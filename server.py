@@ -20,10 +20,17 @@ def web(page,WebUrl,domain):
     myjson[WebUrl]={}
 
     listofpaths=[]
+    differentdomain=[]
 
     if(page>0):
         url = WebUrl
-        code = requests.get(url)
+        try:
+            code = requests.get(url)
+        except:
+            print("I couldn't fetch the URL ! Please check the URL")
+            errorresponse=["I couldn't fetch this URL. Please check the url!"]
+            return errorresponse
+
         # print(code)
         plain = code.text
         # print(plain)
@@ -45,6 +52,9 @@ def web(page,WebUrl,domain):
             if myvalue[1] == domain or myvalue[1] == '' or myvalue[1] == '/' or myvalue[1] == appendwww:
                 print(myvalue[2])
                 listofpaths.append(myvalue[2])
+            else:
+                differentdomain.append(myvalue[1]+myvalue[2])
+
 
         while '' in listofpaths:
             listofpaths.remove('')
@@ -62,7 +72,11 @@ def web(page,WebUrl,domain):
         print(count)
         # mydict={"content":finalset}
 
-        return list(finalset)
+        listoffinalset= list(finalset)
+        if(len(listoffinalset)==0):
+            listoffinalset=differentdomain
+
+        return listoffinalset
 
 
 @app.route('/sitemap',methods = ['GET', 'POST'])
@@ -84,8 +98,16 @@ def login():
       print(parsevalue)
 
       domain = parsevalue[1]
+      protocal = parsevalue[0]
+      domainname=parsevalue[1]
+      if(parsevalue[0]==''):
+          protocal='http'
+          domainname=parsevalue[2]
+          domain=parsevalue[2]
 
-      actualURL = parsevalue[0] + "://" + parsevalue[1]
+
+
+      actualURL = protocal + "://" + domainname
 
       finalresponse=web(1, actualURL, domain)
 
