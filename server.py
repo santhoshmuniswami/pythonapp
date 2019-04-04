@@ -99,9 +99,9 @@ def login():
 
       actualURL = parsevalue[0] + "://" + parsevalue[1]
 
-      finalset=web(1, actualURL, domain)
+      finalresponse=web(1, actualURL, domain)
 
-      return jsonify(finalset)
+      return jsonify(finalresponse)
    else:
       my_dict = {'name': 'John', '1': [2, 4, 3]}
 
