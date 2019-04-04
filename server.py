@@ -29,7 +29,6 @@ def web(page,WebUrl,domain):
         # print(plain)
         s = BeautifulSoup(plain, "html.parser")
         # print(s)
-        finalset = set()
 
         for link in s.findAll('a'):
             print("..................")
@@ -40,17 +39,29 @@ def web(page,WebUrl,domain):
             # print(urljoin(tet_2, '.'))
             # print(urlparse(tet_2))
             myvalue=urlparse(tet_2)
-            if myvalue[1] ==  domain or myvalue[1] == '' or myvalue[1] == '/':
+            print(myvalue)
+            appendwww="www."+domain
+            print(appendwww)
+            if myvalue[1] == domain or myvalue[1] == '' or myvalue[1] == '/' or myvalue[1] == appendwww:
+                print(myvalue[2])
                 listofpaths.append(myvalue[2])
-        
+
         while '' in listofpaths:
             listofpaths.remove('')
 
-
+        print(listofpaths)
         finalset=set(listofpaths)
         print(finalset)
 
+        print(len(listofpaths))
+        print(len(finalset))
         count = count + 1
+
+
+
+        print(count)
+        # mydict={"content":finalset}
+
         return list(finalset)
 
 
