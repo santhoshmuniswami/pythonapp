@@ -77,7 +77,7 @@ def web(page,WebUrl,domain):
         return list(finalset)
 
 
-@app.route('/sitemap',methods = ['GET', 'POST', 'OPTIONS'])
+@app.route('/sitemap',methods = ['GET', 'POST'])
 def login():
    if request.method == 'POST':
       print("Request received at "+str(datetime.now()))
@@ -102,24 +102,12 @@ def login():
       finalset=web(1, actualURL, domain)
 
       return jsonify(finalset)
-
-   elif request.method == 'OPTIONS':
-    return Response(
-      '200 OK',
-      [
-        ('Content-Type', 'application/json'),
-        ('Access-Control-Allow-Origin', '*'),
-        ('Access-Control-Allow-Headers', 'Authorization, Content-Type'),
-        ('Access-Control-Allow-Methods', 'POST'),
-      ]
-    )
-
    else:
       my_dict = {'name': 'John', '1': [2, 4, 3]}
 
       return jsonify(my_dict)
 
 if __name__ == '__main__':
-   app.run(port=6000)
+   app.run(host='0.0.0.0')
 
 
