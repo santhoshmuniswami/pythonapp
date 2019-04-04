@@ -29,6 +29,7 @@ def web(page,WebUrl,domain):
         # print(plain)
         s = BeautifulSoup(plain, "html.parser")
         # print(s)
+        finalset = set()
 
         for link in s.findAll('a'):
             print("..................")
@@ -45,35 +46,11 @@ def web(page,WebUrl,domain):
                     listofpaths.remove('')
 
 
-              #  print(listofpaths)
-
-                finalset=set()
                 finalset=set(listofpaths)
                 print(finalset)
 
-              #  print(len(listofpaths))
-              #  print(len(finalset))
                 count = count + 1
-
-            # secondlist = []
-            # for i in range(len(listofpaths)):
-            #     splitedvalue = str(listofpaths[i]).split('/')
-            #     while '' in splitedvalue:
-            #         splitedvalue.remove('')
-            #     if len(splitedvalue) > 0 and splitedvalue != ["b''"]:
-            #
-            #         secondlist.append(splitedvalue)
-
-
-            # listofpaths.sort()
-            # setoffinal=set(secondlist)
-            # print(listofpaths)
-
-
-
-        print(count)
-        # mydict={"content":finalset}
-
+                
         return list(finalset)
 
 
@@ -109,5 +86,4 @@ def login():
 
 if __name__ == '__main__':
    app.run(host='0.0.0.0')
-
 
